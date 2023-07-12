@@ -1,5 +1,5 @@
 # c_lists
-a library for using lists in c/c++
+a library for using lists in C/C++
 
 This library was written in C by me, NUMBUKU. It defines some basic list operators that languages like Python and 
 JavaScript also have, I used linked lists to do so. It uses three standard libraries: stdio.h, stdlib.h and math.h.

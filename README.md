@@ -16,10 +16,6 @@ a new list, then use:
 "node * 'the name of your new list' = 'the method you want to use'('the name of your list', [any other arguments]);".
 I included an example file so you can see how you might use this library, the file is called: example.c.
 
-I use gcc, so if you use gcc too and don't know how to include this file, follow these steps:
-  1. Go to your file manager and then to: "This PC\C:\lib\gcc\mingw32\6.3.0\include".
-  2. Paste the clists.h file there.
-  3. Go to your C/C++ program and type: "# include <clists.h>"
-  4. Done! You can now use lists in C/C++ just like you would in any other programming language
+To include the file have it in the same folder and type: '# include "clists.h"'
 
 That's it, I hope you learn something.

@@ -355,7 +355,7 @@ double average(node * head){ // returns the average of all elements
     return a/len(head);
 }
 
-double median(node * head){ // returns the median of all elements
+double mean(node * head){ // returns the median of all elements
     node * sorted = sort(head);
     double a = len(sorted);
     int b = a/2;

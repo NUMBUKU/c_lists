@@ -16,6 +16,6 @@ a new list, then use:
 "node * 'the name of your new list' = 'the method you want to use'('the name of your list', [any other arguments]);".
 I included an example file so you can see how you might use this library, the file is called: example.c.
 
-To include the file have it in the same folder and type: '# include "clists.h"'
+To include the file have it in the same folder and type: '# include "clists.h"'.
 
 That's it, I hope you learn something.

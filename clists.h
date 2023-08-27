@@ -32,9 +32,8 @@ node * newList (){ // returns a head which points to a list with a small garbage
 }
 
 node * clear(node * head){ // clears the list and makes it empty again
-    node * temp = NULL;
-    temp = newList();
-    return temp;
+    delete (head);
+    return newList();
 }
 
 void printlist(node * head){ // prints the entire list
@@ -273,6 +272,8 @@ node * reverse(node * head){ // returns a list which is the reverse of the given
         app(returnvalue, atIndex(temp, len(temp) - 1));
         pop(temp);
     }
+
+    delete (temp);
     return returnvalue;
 }
 
@@ -342,6 +343,8 @@ node * sort(node * head){ // returns the given list, but sorted in ascending ord
         app(returnvalue, min(temp));
         temp = removeValue(temp, min(temp));
     }
+
+    delete (temp);
     return returnvalue;
 }
 
@@ -372,12 +375,15 @@ double mode(node * head){ // returns the mode of all elements
     for (int i = 0; i < len(head); i++){
         app(number, count(head, atIndex(head, i)));
     }
-    node * temp = number;
+    node * temp = copy(number);
     double maximum = max(temp);
     temp = removeValue(temp, max(temp));
     if (max(temp) == maximum){
         printf("No mode found in this list");
         return NAN;
     }
-    return atIndex(head, indexOf(number, max(number)));
+
+    double a = atIndex(head, indexOf(number, max(number)));
+    delete (number);
+    return a;
 }

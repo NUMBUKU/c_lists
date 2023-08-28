@@ -1,4 +1,4 @@
-# include <clists.h>
+# include "clists.h"
 
 int main(){
   // note that the list stores double data type
@@ -31,5 +31,12 @@ int main(){
   int negthree = count(list, -3); // counts the number of occurences of the value -3 and stores it in a variable (negthree in this case)
   double maximum = max(list); // strores the maximum value of the list in a variable (maximum in this case)
   list = sort(list); // sorts the list in ascending order
-  averagevalue = average(list); // stores the average of the list in a variable (averagevalue in this case)
+  double averagevalue = average(list); // stores the average of the list in a variable (averagevalue in this case)
+
+  // deletes the lists (prevents memory leaks)
+  delete (list);
+  delete (list2);
+  delete (list3);
+  
+  return 0;
 }

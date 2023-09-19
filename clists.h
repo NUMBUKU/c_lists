@@ -31,8 +31,36 @@ node * newList (){ // returns a head which points to a list with a small garbage
     return a;
 }
 
-node * clear(node * head){ // clears the list and makes it empty again
+int len(node * head){ // returns the length of the list
+    int i = 0;
+    node * current = head;
+    if (current->data == 1.7E-308){
+        return 0;
+    }
+    while (current != NULL){
+        i++;
+        current = current->next;
+    }
+    delete (current);
+    return i;
+}
+
+void del (node * head){
+    node * temp = head;
+    for (int i = len(head); i > 0; i--){
+        for (int j = 0; j < i-1; j++){
+            temp = temp->next;
+        }
+        delete (temp);
+        temp = head;
+    }
     delete (head);
+    delete (temp);
+    return;
+}
+
+node * clear(node * head){ // clears the list and makes it empty again
+    del(head);
     return newList();
 }
 
@@ -42,10 +70,11 @@ void printlist(node * head){ // prints the entire list
         return;
     }
 
-    while (current != NULL) {
+    for (int i = 0; i < len(head); i++) {
         printf("%lf\n", current->data);
         current = current->next;
     }
+    del(current);
     return;
 }
 
@@ -70,20 +99,8 @@ void slice(node * head, int index1, int index2){ // prints the list between the 
             printf("Index %d is not in this list.", index2);
         }
     }
+    del(current);
     return;
-}
-
-int len(node * head){ // returns the length of the list
-    int i = 0;
-    node * current = head;
-    if (current->data == 1.7E-308){
-        return 0;
-    }
-    while (current != NULL){
-        i++;
-        current = current->next;
-    }
-    return i;
 }
 
 void app(node * head, double data){ // appends a value to the end of the list
@@ -99,6 +116,7 @@ void app(node * head, double data){ // appends a value to the end of the list
         current->next->data = data;
         current->next->next = NULL;
     }
+    del(current);
     return;
 }
 
@@ -112,6 +130,7 @@ void extend(node * head, node * head1){ // extends the list by adding another li
         }
         current->next = head1;
     }
+    del(current);
     return;
 }
 
@@ -128,6 +147,7 @@ void pop(node * head){ // removes the value at the end of the list
     node * previous;
     if (len(head) == 1){
         current->data = 1.7E-308;
+        del(current->next);
         current->next = NULL;
         return;
     }
@@ -138,6 +158,8 @@ void pop(node * head){ // removes the value at the end of the list
         }
         previous->next = NULL;
     }
+    del(current);
+    del(previous);
     return;
 }
 
@@ -219,6 +241,7 @@ node * insert(node * head, double data, int index){ // inserts the given value a
     current->next = newList();
     current->next->data = data;
     current->next->next = temp;
+    del(current);
     return head;
 }
 
@@ -241,6 +264,8 @@ node * removeAtIndex(node * head, int index){ // removes the value at the given 
             return head;
         }
     }
+    del(current);
+    del(previous);
     previous->next = current->next;
     return head;
 }
@@ -262,6 +287,8 @@ node * removeValue(node * head, double data){ // removes the first occurence of 
         current = current->next;
     }
     previous->next = previous->next->next;
+    del(current);
+    del(previous);
     return head;
 }
 
@@ -273,7 +300,7 @@ node * reverse(node * head){ // returns a list which is the reverse of the given
         pop(temp);
     }
 
-    delete (temp);
+    del(temp);
     return returnvalue;
 }
 
@@ -308,6 +335,7 @@ int count(node * head, double data){ // returns the number of occurences of the 
         }
         current = current->next;
     }
+    del(current);
     return ans;
 }
 
@@ -344,7 +372,7 @@ node * sort(node * head){ // returns the given list, but sorted in ascending ord
         temp = removeValue(temp, min(temp));
     }
 
-    delete (temp);
+    del(temp);
     return returnvalue;
 }
 
@@ -384,6 +412,14 @@ double mode(node * head){ // returns the mode of all elements
     }
 
     double a = atIndex(head, indexOf(number, max(number)));
-    delete (number);
+    del(number);
     return a;
+}
+
+double total(node * head){ // returns the sum of all elements
+    double out = 0;
+    for (int i = 0; i < len(head); i++){
+        out += atIndex(head, i);
+    }
+    return out;
 }

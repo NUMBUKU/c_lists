@@ -23,6 +23,7 @@ typedef struct node_t { // defines an element
     struct node_t * next;
 } node;
 
+
 node * newList (){ // returns a head which points to a list with a small garbage value in it
     node * a = NULL;
     a = (node *)malloc(sizeof(node));
@@ -41,40 +42,21 @@ int len(node * head){ // returns the length of the list
         i++;
         current = current->next;
     }
-    delete (current);
     return i;
 }
 
-void del (node * head){
-    node * temp = head;
-    for (int i = len(head); i > 0; i--){
-        for (int j = 0; j < i-1; j++){
-            temp = temp->next;
-        }
-        delete (temp);
-        temp = head;
-    }
-    delete (head);
-    delete (temp);
-    return;
-}
-
 node * clear(node * head){ // clears the list and makes it empty again
-    del(head);
     return newList();
 }
 
 void printlist(node * head){ // prints the entire list
     node * current = head;
-    if (current->data == 1.7E-308){
-        return;
-    }
+    if (current->data == 1.7E-308) return;
 
     for (int i = 0; i < len(head); i++) {
         printf("%lf\n", current->data);
         current = current->next;
     }
-    del(current);
     return;
 }
 
@@ -99,7 +81,7 @@ void slice(node * head, int index1, int index2){ // prints the list between the 
             printf("Index %d is not in this list.", index2);
         }
     }
-    del(current);
+    //delete (current);
     return;
 }
 
@@ -116,7 +98,7 @@ void app(node * head, double data){ // appends a value to the end of the list
         current->next->data = data;
         current->next->next = NULL;
     }
-    del(current);
+    //delete (current);
     return;
 }
 
@@ -130,7 +112,6 @@ void extend(node * head, node * head1){ // extends the list by adding another li
         }
         current->next = head1;
     }
-    del(current);
     return;
 }
 
@@ -144,22 +125,15 @@ node * prp(node * head, double data){ // prepends a value to the beginning of th
 
 void pop(node * head){ // removes the value at the end of the list
     node * current = head;
-    node * previous;
     if (len(head) == 1){
-        current->data = 1.7E-308;
-        del(current->next);
-        current->next = NULL;
+        current = newList();
         return;
-    }
-    if (current->data != 1.7E-308){
-        while (current->next != NULL) {
-            previous = current;
+    } else {
+        while (current->next->next != NULL) {
             current = current->next;
         }
-        previous->next = NULL;
+        current->next = NULL;
     }
-    del(current);
-    del(previous);
     return;
 }
 
@@ -167,7 +141,10 @@ node * shift(node * head){ // removes the value at the beginning of the list and
     if (len(head) == 1){
         return newList();
     }
-    return head->next;
+    node * del = head;
+    head = head->next;
+    delete del;
+    return head;
 }
 
 node * copy(node * head){ // returns a copy of the original list, without pointing to the same thing
@@ -241,7 +218,7 @@ node * insert(node * head, double data, int index){ // inserts the given value a
     current->next = newList();
     current->next->data = data;
     current->next->next = temp;
-    del(current);
+    //delete (current);
     return head;
 }
 
@@ -264,8 +241,8 @@ node * removeAtIndex(node * head, int index){ // removes the value at the given 
             return head;
         }
     }
-    del(current);
-    del(previous);
+    //delete (current);
+    //delete (previous);
     previous->next = current->next;
     return head;
 }
@@ -287,8 +264,8 @@ node * removeValue(node * head, double data){ // removes the first occurence of 
         current = current->next;
     }
     previous->next = previous->next->next;
-    del(current);
-    del(previous);
+    //delete (current);
+    //delete (previous);
     return head;
 }
 
@@ -300,7 +277,7 @@ node * reverse(node * head){ // returns a list which is the reverse of the given
         pop(temp);
     }
 
-    del(temp);
+    //delete (temp);
     return returnvalue;
 }
 
@@ -335,7 +312,7 @@ int count(node * head, double data){ // returns the number of occurences of the 
         }
         current = current->next;
     }
-    del(current);
+    //delete (current);
     return ans;
 }
 
@@ -372,7 +349,7 @@ node * sort(node * head){ // returns the given list, but sorted in ascending ord
         temp = removeValue(temp, min(temp));
     }
 
-    del(temp);
+    //delete (temp);
     return returnvalue;
 }
 
@@ -412,7 +389,7 @@ double mode(node * head){ // returns the mode of all elements
     }
 
     double a = atIndex(head, indexOf(number, max(number)));
-    del(number);
+    //delete (number);
     return a;
 }
 

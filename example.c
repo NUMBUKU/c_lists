@@ -1,4 +1,4 @@
-# include "clists.h"
+# include "clists.c"
 
 int main(){
   // note that the list stores double data type

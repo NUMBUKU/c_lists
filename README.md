@@ -1,7 +1,7 @@
 # c_lists
 a library for using lists in C/C++
 
-#Disclaimer!! This repository is very buggy and has memory leaks. I mad ethis repo when I didn't know much about the c language, so yeah, don't use it! I plan on updating it sometime but right now I am very busy.
+# Disclaimer!! This repository is very buggy and has memory leaks. I made this repo when I didn't know much about the c language, so yeah, don't use it! I plan on updating it sometime but right now I am very busy.
 
 This library was written in C by me, NUMBUKU. It defines some basic list operators that languages like Python and 
 JavaScript also have, I used linked lists to do so. It uses three standard libraries: stdio.h, stdlib.h and math.h.
